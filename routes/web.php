@@ -1,6 +1,8 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\ControlStructsController;
+use App\Http\Controllers\FormsController;
 
 /*
 |--------------------------------------------------------------------------
@@ -13,6 +15,20 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+// Route::get('/', function () {
+//     // return redirect('/about');
+//     return view('welcome');
+// });
+
+Route::view('/','home'); # Main entry point. welcome view is for the laravel default project page
+
+
+// Route::get('about', function() {
+//     return view('about');
+// });
+Route::view('/about','about'); # This is the same as above
+Route::view('/contact','contact');
+Route::get('/laravel-cs',[ControlStructsController::class,'viewLoad']);
+
+Route::post("/userForm", [FormsController::class,'getData']);
+Route::view("/login","forms");
