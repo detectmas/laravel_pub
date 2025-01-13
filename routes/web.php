@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use Illuminate\Http\Request;
 
 /*
 |--------------------------------------------------------------------------
@@ -13,6 +14,17 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+# Landing page
 Route::get('/', function () {
-    return view('welcome');
+    return view('tasks');
+});
+
+# Add a task
+Route::post('/task', function (Request $request) {
+    //
+});
+
+# Delete an existing task
+Route::delete('/task/{id}', function ($id) {
+    //
 });
