@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use Illuminate\Http\Request;
+use App\Models\Task;
 
 /*
 |--------------------------------------------------------------------------
@@ -20,8 +21,21 @@ Route::get('/', function () {
 });
 
 # Add a task
-Route::post('/task', function (Request $request) {
-    //
+Route::post('/new-task', function (Request $req) {
+    $validator = Validator::make($req->all(), [
+        'name' => 'required|max:255',
+    ]);
+ 
+    if ($validator->fails()) {
+        return redirect('/')
+            ->withInput()
+            ->withErrors($validator);
+    }
+    # Create and save task
+    $task = new Task;
+    $task->name = $req->name;
+    $task->save();
+    return redirect('/');
 });
 
 # Delete an existing task
