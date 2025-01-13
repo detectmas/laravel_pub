@@ -15,8 +15,10 @@ use App\Models\Task;
 |
 */
 
+
 # Landing page with all tasks
-Route::get('/', function () { #Probably more appropriate to use a controller
+#Probably more appropriate to use a controller like TaskController and move all the logic there
+Route::get('/', function () { 
     $tasks = Task::orderBy('created_at', 'asc')->get();
     return view('tasks', [
         'tasks' => $tasks
@@ -43,5 +45,6 @@ Route::post('/new-task', function (Request $req) {
 
 # Delete an existing task
 Route::delete('/task/{id}', function ($id) {
-    //
+    Task::findOrFail($id)->delete();
+    return redirect('/');
 });
