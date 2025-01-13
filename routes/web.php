@@ -15,9 +15,12 @@ use App\Models\Task;
 |
 */
 
-# Landing page
-Route::get('/', function () {
-    return view('tasks');
+# Landing page with all tasks
+Route::get('/', function () { #Probably more appropriate to use a controller
+    $tasks = Task::orderBy('created_at', 'asc')->get();
+    return view('tasks', [
+        'tasks' => $tasks
+    ]);
 });
 
 # Add a task
