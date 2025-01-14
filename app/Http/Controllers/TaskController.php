@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use App\Models\Task;
@@ -29,12 +30,16 @@ class TaskController extends Controller
         Task::create([
             'name' => $req->name
         ]);
-        
+
         return redirect('/')->with('success', 'Task added successfully!');
     }
 
     public function delete($id) {
-        Task::findOrFail($id)->delete();
-        return redirect('/')->with('deleted', 'Task deleted successfully!');
+        try {
+            Task::findOrFail($id)->delete();
+            return redirect('/')->with('delete', 'Task deleted successfully!');
+        } catch (ModelNotFoundException $e) {
+            return redirect('/')->with('deleteError', 'Task not found!');
+        }
     }
 }

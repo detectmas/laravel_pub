@@ -45,9 +45,13 @@
                     </div>
 
                     <div class="panel-body">
-                        @if (session('deleted'))
+                        @if (session('delete'))
                             <div class="alert alert-success">
                                 <strong>{{ session('deleted') }}</strong>
+                            </div>
+                        @elseif (session('deleteError'))
+                            <div class="alert alert-danger">
+                                <strong>{{ session('deleteError') }}</strong>
                             </div>
                         @endif
                         <table class="table table-striped task-table">
