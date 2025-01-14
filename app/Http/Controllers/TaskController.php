@@ -17,7 +17,7 @@ class TaskController extends Controller
 
     public function add(Request $req) {
         $validator = Validator::make($req->all(), [
-            'name' => 'required|max:25',
+            'name' => 'required|string|max:25',
         ]);
     
         if ($validator->fails()) {
