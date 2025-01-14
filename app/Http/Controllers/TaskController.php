@@ -26,14 +26,15 @@ class TaskController extends Controller
                 ->withErrors($validator);
         }
         # Create and save task
-        $task = new Task;
-        $task->name = $req->name;
-        $task->save();
-        return redirect('/');
+        Task::create([
+            'name' => $req->name
+        ]);
+        
+        return redirect('/')->with('success', 'Task added successfully!');
     }
 
     public function delete($id) {
         Task::findOrFail($id)->delete();
-        return redirect('/');
+        return redirect('/')->with('deleted', 'Task deleted successfully!');
     }
 }

@@ -11,7 +11,11 @@
                 <div class="panel-body">
                     <!-- Display Validation Errors -->
                     @include('common.errors')
-            
+                    @if (session('success'))
+                        <div class="alert alert-success">
+                            <strong>{{ session('success') }}</strong>
+                        </div>
+                    @endif
                     <!-- New Task Form -->
                     <form action="/new-task" method="POST" class="form">
                         @csrf            
@@ -34,14 +38,18 @@
                     </form>
                 </div>
             </div>
-            <!-- TODO: Current Tasks -->
             @if (count($tasks) > 0)
                 <div class="panel panel-default">
                     <div class="panel-heading">
                         Current Tasks
                     </div>
-        
+
                     <div class="panel-body">
+                        @if (session('deleted'))
+                            <div class="alert alert-success">
+                                <strong>{{ session('deleted') }}</strong>
+                            </div>
+                        @endif
                         <table class="table table-striped task-table">
         
                             <!-- Table Headings -->
@@ -59,13 +67,11 @@
                                             <div>{{ $task->name }}</div>
                                         </td>
         
-                                        <!-- TODO: Delete Button -->
                                         <td>
                                             <form action="/task/{{ $task->id }}" method="POST">
                                                 @csrf
                                                 {{ method_field('DELETE') }}
                                         
-                                                {{-- <button>Delete Task</button> --}}
                                                 <button type="submit" class="btn btn-danger">
                                                     <i class="fa fa-btn fa-trash"></i>Delete
                                                 </button>                                        
