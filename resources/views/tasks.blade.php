@@ -38,56 +38,54 @@
                     </form>
                 </div>
             </div>
-            @if (count($tasks) > 0)
-                <div class="panel panel-default">
-                    <div class="panel-heading">
-                        Current Tasks
-                    </div>
-
-                    <div class="panel-body">
-                        @if (session('delete'))
-                            <div class="alert alert-success">
-                                <strong>{{ session('delete') }}</strong>
-                            </div>
-                        @elseif (session('deleteError'))
-                            <div class="alert alert-danger">
-                                <strong>{{ session('deleteError') }}</strong>
-                            </div>
-                        @endif
-                        <table class="table table-striped task-table">
-        
-                            <!-- Table Headings -->
-                            <thead>
-                                <th>Task</th>
-                                <th>&nbsp;</th>
-                            </thead>
-        
-                            <!-- Table Body -->
-                            <tbody>
-                                @foreach ($tasks as $task)
-                                    <tr>
-                                        <!-- Task Name -->
-                                        <td class="table-text">
-                                            <div>{{ $task->name }}</div>
-                                        </td>
-        
-                                        <td>
-                                            <form action="/task/{{ $task->id }}" method="POST">
-                                                @csrf
-                                                {{ method_field('DELETE') }}
-                                        
-                                                <button type="submit" class="btn btn-danger">
-                                                    <i class="fa fa-btn fa-trash"></i>Delete
-                                                </button>                                        
-                                            </form>
-                                        </td>
-                                    </tr>
-                                @endforeach
-                            </tbody>
-                        </table>
-                    </div>
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    Current Tasks
                 </div>
-            @endif
+
+                <div class="panel-body">
+                    @if (session('delete'))
+                        <div class="alert alert-success">
+                            <strong>{{ session('delete') }}</strong>
+                        </div>
+                    @elseif (session('deleteError'))
+                        <div class="alert alert-danger">
+                            <strong>{{ session('deleteError') }}</strong>
+                        </div>
+                    @endif
+                    <table class="table table-striped task-table">
+    
+                        <!-- Table Headings -->
+                        <thead>
+                            <th>Task</th>
+                            <th>&nbsp;</th>
+                        </thead>
+    
+                        <!-- Table Body -->
+                        <tbody>
+                            @foreach ($tasks as $task)
+                                <tr>
+                                    <!-- Task Name -->
+                                    <td class="table-text">
+                                        <div>{{ $task->name }}</div>
+                                    </td>
+    
+                                    <td>
+                                        <form action="/task/{{ $task->id }}" method="POST">
+                                            @csrf
+                                            {{ method_field('DELETE') }}
+                                    
+                                            <button type="submit" class="btn btn-danger">
+                                                <i class="fa fa-btn fa-trash"></i>Delete
+                                            </button>                                        
+                                        </form>
+                                    </td>
+                                </tr>
+                            @endforeach
+                        </tbody>
+                    </table>
+                </div>
+            </div>
         </div>
     </div>
 @endsection
