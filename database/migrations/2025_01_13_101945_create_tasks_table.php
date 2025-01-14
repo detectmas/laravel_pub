@@ -15,7 +15,7 @@ return new class extends Migration
     {
         Schema::create('tasks', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
+            $table->string('name', 25); # Set max length in case the server-side validation fails
             $table->timestamps();
         });
     }

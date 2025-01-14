@@ -17,11 +17,10 @@ use App\Http\Controllers\TaskController;
 
 
 # Landing page with all tasks
-#Probably more appropriate to use a controller like TaskController and move all the logic there
-Route::get('/', [TaskController::class,'displayTasks']);
+Route::get('/', [TaskController::class,'display']);
 
 # Add a task
-Route::post('/new-task', [TaskController::class,'addTask']);
+Route::post('/new-task', [TaskController::class,'add']);
 
 # Delete an existing task
-Route::delete('/task/{id}',[TaskController::class,'deleteTask']);
+Route::delete('/task/{id}',[TaskController::class,'delete']);
