@@ -1,8 +1,8 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use Illuminate\Http\Request;
-use App\Models\Task;
+use App\Http\Controllers\TaskController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -17,34 +17,10 @@ use App\Models\Task;
 
 
 # Landing page with all tasks
-#Probably more appropriate to use a controller like TaskController and move all the logic there
-Route::get('/', function () { 
-    $tasks = Task::orderBy('created_at', 'asc')->get();
-    return view('tasks', [
-        'tasks' => $tasks
-    ]);
-});
+Route::get('/', [TaskController::class,'display']);
 
 # Add a task
-Route::post('/new-task', function (Request $req) {
-    $validator = Validator::make($req->all(), [
-        'name' => 'required|max:255',
-    ]);
- 
-    if ($validator->fails()) {
-        return redirect('/')
-            ->withInput()
-            ->withErrors($validator);
-    }
-    # Create and save task
-    $task = new Task;
-    $task->name = $req->name;
-    $task->save();
-    return redirect('/');
-});
+Route::post('/new-task', [TaskController::class,'add']);
 
 # Delete an existing task
-Route::delete('/task/{id}', function ($id) {
-    Task::findOrFail($id)->delete();
-    return redirect('/');
-});
+Route::delete('/task/{id}',[TaskController::class,'delete']);
