@@ -8,14 +8,14 @@ use App\Models\Task;
 class TaskController extends Controller
 {
     //
-    function displayTasks() { 
+    public function display() { 
         $tasks = Task::orderBy('created_at', 'asc')->get();
         return view('tasks', [
             'tasks' => $tasks
         ]);
     }
 
-    function addTask(Request $req) {
+    public function add(Request $req) {
         $validator = Validator::make($req->all(), [
             'name' => 'required|max:255',
         ]);
@@ -32,7 +32,7 @@ class TaskController extends Controller
         return redirect('/');
     }
 
-    function deleteTask($id) {
+    public function delete($id) {
         Task::findOrFail($id)->delete();
         return redirect('/');
     }
