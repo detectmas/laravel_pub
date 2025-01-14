@@ -47,7 +47,7 @@
                     <div class="panel-body">
                         @if (session('delete'))
                             <div class="alert alert-success">
-                                <strong>{{ session('deleted') }}</strong>
+                                <strong>{{ session('delete') }}</strong>
                             </div>
                         @elseif (session('deleteError'))
                             <div class="alert alert-danger">
