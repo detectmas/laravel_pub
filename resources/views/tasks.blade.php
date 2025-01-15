@@ -21,15 +21,27 @@
                         @csrf            
                         <!-- Task Name -->
                         <div class="form-group row">
-                            <label for="task" class="col-sm-2 col-form-label">Task</label>
-                            <div class="col-sm-12">
+                                <!-- Task Name -->
+                            <div class="col-md-4">
+                                <label for="task" class="col-form-label">Task Name</label>
                                 <input type="text" name="name" id="task" class="form-control" value="{{ old('task') }}">
+                            </div>                    
+                            <!-- Task Date -->
+                            <div class="col-md-4">
+                                <label for="date" class="col-form-label">Due Date</label>
+                                <input type="date" name="date" id="date" class="form-control" value="{{ old('date') }}">
                             </div>
+
+                            <!-- Task Time -->
+                            <div class="col-md-4">
+                                <label for="time" class="col-form-label">Due Time</label>
+                                <input type="time" name="time" id="time" class="form-control" value="{{ old('time') }}">
+                            </div>        
                         </div>
             
                         <!-- Add Task Button -->
                         <div class="form-group row">
-                            <div class="col-sm-10 offset-sm-2">
+                            <div class="col-sm-12">
                                 <button type="submit" class="btn btn-default">
                                     <i class="fa fa-plus"></i> Add Task
                                 </button>
@@ -57,7 +69,9 @@
     
                         <!-- Table Headings -->
                         <thead>
-                            <th>Task</th>
+                            <th>Task Name</th>
+                            <th>Date</th>
+                            <th>Time</th>
                             <th>&nbsp;</th>
                         </thead>
     
@@ -69,7 +83,15 @@
                                     <td class="table-text">
                                         <div>{{ $task->name }}</div>
                                     </td>
-    
+                                    <!-- Task Date -->
+                                    <td class="table-text">
+                                        <div>{{ $task->date }}</div>
+                                    </td>
+                                    
+                                    <!-- Task Time -->
+                                    <td class="table-text">
+                                        <div>{{ $task->time }}</div>
+                                    </td>
                                     <td>
                                         <form action="/task/{{ $task->id }}" method="POST">
                                             @csrf
