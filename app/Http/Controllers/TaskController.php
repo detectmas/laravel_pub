@@ -19,6 +19,8 @@ class TaskController extends Controller
     public function add(Request $req) {
         $validator = Validator::make($req->all(), [
             'name' => 'required|string|max:25',
+            'date' => 'required|date',
+            'time' => 'required|date_format:H:i'
         ]);
     
         if ($validator->fails()) {
@@ -28,7 +30,9 @@ class TaskController extends Controller
         }
         # Create and save task
         Task::create([
-            'name' => $req->name
+            'name' => $req->name,
+            'date' => $req->date,
+            'time' => $req->time
         ]);
 
         return redirect('/')->with('success', 'Task added successfully!');
