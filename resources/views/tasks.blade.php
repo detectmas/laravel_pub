@@ -73,7 +73,7 @@
                         <thead>
                             <th>Task Name</th>
                             <th>Date</th>
-                            <th>Time</th>
+                            <th>Due Time</th>
                             <th>&nbsp;</th>
                         </thead>
     
