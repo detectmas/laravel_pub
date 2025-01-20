@@ -5,7 +5,7 @@
         <div class="col-sm-offset-2 col-sm-8">
             <div class="panel panel-default">
                 <div class="panel-heading">
-                    New Task
+                    <strong>New Task</strong>
                 </div>
             
                 <div class="panel-body">
@@ -19,7 +19,6 @@
                     <!-- New Task Form -->
                     <form action="/new-task" method="POST" class="form">
                         @csrf            
-                        <!-- Task Name -->
                         <div class="form-group row">
                                 <!-- Task Name -->
                             <div class="col-md-4">
@@ -35,8 +34,11 @@
                             <!-- Task Time -->
                             <div class="col-md-4">
                                 <label for="time" class="col-form-label">Due Time</label>
-                                <input type="time" name="time" id="time" class="form-control" value="{{ old('time') }}">
-                            </div>        
+                                <select name="time" id="time" class="form-control">
+                                    <option value="AM" {{ old('time') == 'AM' ? 'selected' : '' }}>AM</option>
+                                    <option value="PM" {{ old('time') == 'PM' ? 'selected' : '' }}>PM</option>
+                                </select>
+                            </div>
                         </div>
             
                         <!-- Add Task Button -->
@@ -52,7 +54,7 @@
             </div>
             <div class="panel panel-default">
                 <div class="panel-heading">
-                    Current Tasks
+                    <strong>Current Tasks</strong>
                 </div>
 
                 <div class="panel-body">

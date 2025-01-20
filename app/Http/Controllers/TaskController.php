@@ -19,9 +19,20 @@ class TaskController extends Controller
     public function add(Request $req) {
         $validator = Validator::make($req->all(), [
             'name' => 'required|string|max:25',
-            'date' => 'required|date',
-            'time' => 'required|date_format:H:i'
+            'date' => 'required|string|date_format:Y-m-d',
+            'time' => 'required|string|in:AM,PM'
         ]);
+
+        // Ensure that 2 tasks are not created for the same date and time
+        $validator->after(fn($validator) => 
+            // Check if a task with the same date and time already exists and add an error IF it does
+            Task::where('date', $req->date)
+                ->where('time', $req->time)
+                ->exists() && 
+                $validator->errors()->add(
+                    'taskExists', 'Another Task already exists for this date and time!'
+                    )
+        );
     
         if ($validator->fails()) {
             return redirect('/')

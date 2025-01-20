@@ -14,8 +14,8 @@ return new class extends Migration
     public function up()
     {
         Schema::table('tasks', function (Blueprint $table) {
-            $table->date('date')->nullable();
-            $table->time('time')->nullable();
+            $table->string('date', 50)->change();
+            $table->string('time', 5)->change();
         });
     }
 
@@ -27,7 +27,8 @@ return new class extends Migration
     public function down()
     {
         Schema::table('tasks', function (Blueprint $table) {
-            $table->dropColumn(['date', 'time']);
+            $table->date('date')->change();
+            $table->time('time')->change();
         });
     }
 };
