@@ -72,7 +72,7 @@
                         <!-- Table Headings -->
                         <thead>
                             <th>Task Name</th>
-                            <th>Date</th>
+                            <th>Due Date</th>
                             <th>Due Time</th>
                             <th>&nbsp;</th>
                         </thead>
